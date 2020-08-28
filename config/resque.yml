@@ -1,0 +1,5 @@
+development: redis:6379
+test: redis:6379
+staging: redis1.se.github.com:6379
+fi: redis:6379
+production: <%= ENV['REDIS_URL'] %>
