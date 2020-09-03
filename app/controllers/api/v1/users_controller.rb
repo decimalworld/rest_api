@@ -34,11 +34,6 @@ class Api::V1::UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation) #.merge(attr: attr_value)
-
     end
 
-    def generate_authentication_token!
-      begin
-        self.auth_token = Devise.friendly_token
-      end while self.class.exists?(auth_token: auth_token)
 end
