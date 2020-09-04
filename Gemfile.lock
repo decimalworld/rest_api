@@ -148,6 +148,8 @@ GEM
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
       rspec-mocks (~> 3.9.0)
+    rspec-collection_matchers (1.2.0)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.9.2)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.2)
@@ -221,6 +223,7 @@ DEPENDENCIES
   rails (~> 5.2.4, >= 5.2.4.3)
   resque
   rspec
+  rspec-collection_matchers
   rspec-rails
   shoulda
   shoulda-matchers
