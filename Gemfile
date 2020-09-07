@@ -32,6 +32,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'therubyracer'
 gem 'execjs'
 gem 'devise'
+gem 'active_model_serializers', '~> 0.10.0'
 
 # group :test do
 #   gem 'rspec'
