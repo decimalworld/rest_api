@@ -3,8 +3,7 @@ class Api::V1::ProductsController < ApplicationController
   respond_to :json
 
   def index
-    products = {products: Product.all}
-    respond_with products
+    respond_with Product.all
   end
 
   def show
