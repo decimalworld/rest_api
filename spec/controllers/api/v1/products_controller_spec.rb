@@ -14,7 +14,7 @@ RSpec.describe Api::V1::ProductsController do
 
     it "has the user as a embeded object" do
       product_response = json_response
-      expect(product_response[:included]).to be_present
+      expect(product_response[:data][:relationships][:user]).to be_present
     end
 
 

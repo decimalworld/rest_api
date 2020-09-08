@@ -7,7 +7,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def show
-    render json:Product.find(params[:id]), include: ['user']
+    render json:Product.find(params[:id])
   end
 
   def create
