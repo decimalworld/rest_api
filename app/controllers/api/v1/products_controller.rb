@@ -3,7 +3,7 @@ class Api::V1::ProductsController < ApplicationController
   respond_to :json
 
   def index
-    render json:Product.all, include: ['user']
+    respond_with Product.search(params)
   end
 
   def show

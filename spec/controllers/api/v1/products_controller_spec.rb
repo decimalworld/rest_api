@@ -27,6 +27,41 @@ RSpec.describe Api::V1::ProductsController do
       4.times { FactoryBot.create :product }
       get :index
     end
+  
+    context "when is not receiveing any product_ids paramenter" do
+      before(:each) do
+        get :index
+      end
+
+      it "returns 4 records from the database" do
+        product_response = json_response
+        expect(product_response[:data]).to have(4).items
+      end
+
+      it "returns the user object into each product" do
+        product_response = json_response[:data]
+        product_response.each do |product_response|
+          expect(product_response[:relationships][:user]).to be_present
+        end
+      end
+
+      it { should respond_with 200 }
+    end
+
+    context "when product_ids paramenter is sent" do
+      before(:each) do
+        @user = FactoryBot.create :user
+        3.times { FactoryBot.create :product, user: @user}
+        get :index, params: {product_ids: @user.product_ids}
+      end
+
+      it "returns just the products that belong to the user" do
+        products_response = json_response[:data]
+        products_response.each do |product_response|
+          expect(product_response[:relationships][:user][:data][:id]).to eql @user.id.to_s
+        end
+      end
+    end
 
     it "returns 4 records from the database" do
       products_response = json_response
@@ -146,4 +181,6 @@ RSpec.describe Api::V1::ProductsController do
     end
     it { should respond_with 204}
   end
+
+  
 end
