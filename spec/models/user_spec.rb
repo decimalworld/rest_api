@@ -15,7 +15,9 @@ RSpec.describe User, type: :model do
   it { should validate_confirmation_of(:password)}
   it { should allow_value('example@domain.com').for(:email) }
   it { should respond_to(:auth_token) }
-  it { should have_many(:product) }
+
+  it { should have_many(:products) }
+  it { should have_many(:orders) }
   # it { should validate_uniqueness_of(:auth_token).ignoring_case_sensitivity }
 
   describe "#generate_authentication_token!" do
@@ -39,7 +41,7 @@ RSpec.describe User, type: :model do
     end
 
     it "destroys the associated products on self destruct" do
-      products = @user.product
+      products = @user.products
       @user.destroy
       products.each do |product|
         expect(Product.find(product)).to raise_error ActiveRecord::RecordNotFound
