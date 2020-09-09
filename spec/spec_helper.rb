@@ -20,6 +20,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'email_spec'
+require 'email_spec/rspec'
 require 'rspec/collection_matchers'
 
 # with many helpers
@@ -67,6 +69,8 @@ RSpec.configure do |config|
   config.include Request::JsonHelpers, :type => :controller
   config.include Request::HeaderHelpers, :type => :controller
   config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 
   config.before(:each, type: :controller) do
     include_default_accept_headers

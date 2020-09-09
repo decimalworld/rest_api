@@ -50,6 +50,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'shoulda-matchers'
   gem 'shoulda'
+  gem 'email_spec'
 end
 
 group :development do
