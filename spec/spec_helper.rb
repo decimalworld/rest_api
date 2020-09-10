@@ -26,6 +26,7 @@ require 'rspec/collection_matchers'
 
 # with many helpers
 Dir[File.dirname(__FILE__) + "/support/*.rb"].each {|f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 # or only one   
 # require 'support/request_helpers'
 

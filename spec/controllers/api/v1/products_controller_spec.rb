@@ -42,12 +42,7 @@ RSpec.describe Api::V1::ProductsController do
         end
       end
 
-      it { expect(json_response).to have_key(:meta)}
-      it { expect(json_response[:meta]).to have_key(:pagination) }
-      it { expect(json_response[:meta][:pagination]).to have_key(:"per-page") }
-      it { expect(json_response[:meta][:pagination]).to have_key(:"total-pages") }
-      it { expect(json_response[:meta][:pagination]).to have_key(:"total-objects") }
-
+      it_behaves_like "paginated list"
       it { should respond_with 200 }
     end
 
