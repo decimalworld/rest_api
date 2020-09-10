@@ -7,6 +7,7 @@ RSpec.describe Product, type: :model do
   it { should respond_to(:title) }
   it { should respond_to(:price) }
   it { should respond_to(:published) }
+  it { should respond_to(:quantity) }
   it { should respond_to(:user_id) }
 
   it { expect(:published).not_to be true }
@@ -14,6 +15,7 @@ RSpec.describe Product, type: :model do
   it { should validate_presence_of :title }
   it { should validate_presence_of :price }
   it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
+  it { should validate_numericality_of(:quantity).is_greater_than_or_equal_to(0) }
   it { should validate_presence_of :user_id}
   
   it { should belong_to :user }

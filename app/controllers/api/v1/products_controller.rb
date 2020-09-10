@@ -3,6 +3,7 @@ class Api::V1::ProductsController < ApplicationController
   respond_to :json
 
   def index
+    Resque.enqueue(Sleeper, 5)
     products = Product.search(params).page(params[:page]).per(params[:per_page])
     render json: products,
       meta: pagination(products, params[:per_page])
@@ -38,6 +39,6 @@ class Api::V1::ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:title, :price, :published)
+      params.require(:product).permit(:title, :price, :published, :quantity)
     end
 end

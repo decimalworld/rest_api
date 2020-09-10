@@ -14,7 +14,7 @@ class Api::V1::OrdersController < ApplicationController
 
   def create 
     order = current_user.orders.build
-    order.build_placements_with_product_ids_and_quantities(params[:order][:product_ids_and_quantities])
+    order.build_placements_with_product_ids_and_quantities(params[:product_ids_and_quantities])
 
     if order.save
       order.reload
@@ -27,6 +27,6 @@ class Api::V1::OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:product_ids => [])
+      params.require(:order).permit(:product_ids_and_quantities => [])
     end
 end
