@@ -16,7 +16,7 @@ RSpec.describe Api::V1::UsersController do
 
     it "has the product ids as an embeded object" do
       user_response = json_response[:data]
-      expect(user_response[:relationships][:product][:data]).to eql []
+      expect(user_response[:relationships][:products][:data]).to eql []
     end
 
 

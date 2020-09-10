@@ -27,7 +27,7 @@ RSpec.describe OrderMailer, type: :mailer do
     end
 
     it "should have the products count" do
-      (@order_mailer).to have_body_text(/You ordered #{@order.products.count} products:/)
+      expect(@order_mailer).to have_body_text(/You ordered #{@order.products.count} products:/)
     end
   end
 end

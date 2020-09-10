@@ -61,22 +61,11 @@ RSpec.describe Api::V1::OrdersController do
       expect(order_response[:id]).to be_present
     end
 
+    it "embeds the two product objects related to the order" do
+      order_response = json_response[:order]
+      expect(order_response[:products].size).to eql 2
+    end
+
     it { should respond_with 201 }
   end
-
-  # describe '#set_total!' do
-  #   before(:each) do
-  #     current_user = FactoryBot.create :user
-
-  #     product_1 = FactoryBot.create :product, price: 100
-  #     product_2 = FactoryBot.create :product, price: 85
-
-  #     @order = FactoryBot.create :order, product_ids: [product_1.id,product_2.id], user: current_user
-  #   end
-
-  #   it "returns the total amount to pay for the products" do
-  #     expect{@order.set_total!}.to change{@order.total}.to(185)
-  #   end
-
-  # end  
 end
