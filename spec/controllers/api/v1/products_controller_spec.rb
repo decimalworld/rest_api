@@ -23,13 +23,10 @@ RSpec.describe Api::V1::ProductsController do
   end
 
   describe "GET #index" do
-    before(:each) do
-      4.times { FactoryBot.create :product }
-      get :index
-    end
   
     context "when is not receiveing any product_ids paramenter" do
       before(:each) do
+        4.times { FactoryBot.create :product }
         get :index
       end
 
@@ -44,6 +41,12 @@ RSpec.describe Api::V1::ProductsController do
           expect(product_response[:relationships][:user]).to be_present
         end
       end
+
+      it { expect(json_response).to have_key(:meta)}
+      it { expect(json_response[:meta]).to have_key(:pagination) }
+      it { expect(json_response[:meta][:pagination]).to have_key(:"per-page") }
+      it { expect(json_response[:meta][:pagination]).to have_key(:"total-pages") }
+      it { expect(json_response[:meta][:pagination]).to have_key(:"total-objects") }
 
       it { should respond_with 200 }
     end
@@ -62,20 +65,6 @@ RSpec.describe Api::V1::ProductsController do
         end
       end
     end
-
-    it "returns 4 records from the database" do
-      products_response = json_response
-      expect(products_response[:data]).to have(4).items
-    end
-
-    it "returns the user object into each product" do
-      products_response = json_response[:data]
-      products_response.each do |product_response|
-        expect(product_response[:relationships][:user]).to be_present
-      end
-    end
-
-    it { should respond_with 200 }
   end
 
   describe "POST #create" do
